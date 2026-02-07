@@ -1,0 +1,136 @@
+{
+	"pages": [
+		{
+			"width": 3,
+			"height": 2,
+			"backgroundUrl": "https://w.wallhaven.cc/full/j3/wallhaven-j3l2xp.jpg",
+			"tiles": [
+				{
+					"iconName": "spotify",
+					"action": {
+						"Macro": {
+							"name": "run_spotify"
+						}
+					}
+				},
+				{
+					"iconName": "notepad++",
+					"action": {
+						"Macro": {
+							"name": "run_notepad"
+						}
+					}
+				},
+				{
+					"iconName": "brave",
+					"action": {
+						"Macro": {
+							"name": "run_brave"
+						}
+					}
+				},
+				{
+					"iconName": "steam",
+					"action": {
+						"Macro": {
+							"name": "run_steam"
+						}
+					}
+				},
+				{
+					"iconName": "powershell",
+					"action": {
+						"Macro": {
+							"name": "run_powershell"
+						}
+					}
+				},
+				{
+					"iconName": "battlenet",
+					"action": {
+						"Macro": {
+							"name": "run_battlenet"
+						}
+					}
+				}
+			]
+		},
+		{
+			"width": 3,
+			"height": 1,
+			"backgroundUrl": "https://w.wallhaven.cc/full/r2/wallhaven-r2ory7.jpg",
+			"tiles": [
+				{
+					"label": "Previous",
+					"iconName": "skip_previous",
+					"action": {
+						"Macro": {
+							"name": "prev_media"
+						}
+					}
+				},
+				{
+					"label": "Play/Pause",
+					"iconName": "play_pause",
+					"action": {
+						"Macro": {
+							"name": "play_pause_media"
+						}
+					}
+				},
+				{
+					"label": "Next",
+					"iconName": "skip_next",
+					"action": {
+						"Macro": {
+							"name": "next_media"
+						}
+					}
+				}
+			]
+		},
+		{
+			"width": 2,
+			"height": 2,
+			"backgroundUrl": "https://w.wallhaven.cc/full/gj/wallhaven-gjwgk7.jpg",
+			"tiles": [
+				{
+					"label": "Volume down",
+					"iconName": "volume_down",
+					"action": {
+						"Macro": {
+							"name": "volume_down"
+						}
+					}
+				},
+				{
+					"label": "Volume up",
+					"iconName": "volume_up",
+					"action": {
+						"Macro": {
+							"name": "volume_up"
+						}
+					}
+				},
+				{
+					"label": "Mute mic",
+					"iconName": "mic_off",
+					"action": {
+						"Macro": {
+							"name": "mute_mic_discord"
+						}
+					}
+				},
+				{
+					"label": "Mute headphones",
+					"iconName": "headset_off",
+					"action": {
+						"Macro": {
+							"name": "mute_headphones_discord"
+						}
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,13 @@
+[project]
+name = "deck!t-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ahk>=1.8.4",
+    "fastapi[standard-no-fastapi-cloud-cli]>=0.128.0",
+    "pillow>=12.1.0",
+    "pyinstaller>=6.18.0",
+    "pystray>=0.19.5",
+]
