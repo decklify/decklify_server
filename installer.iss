@@ -40,6 +40,13 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
+[Tasks]
+Name: autostart; Description: "Launch Decklify at Windows startup"; GroupDescription: "Additional Tasks"
+
+[Registry]
+Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; \
+    ValueType: string; ValueName: "Decklify"; ValueData: """{app}\Decklify.exe"""; Flags: uninsdeletevalue; Tasks: autostart
+
 [Files]
 Source: "dist\Decklify\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
