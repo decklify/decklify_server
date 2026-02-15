@@ -3,7 +3,7 @@
 
 a = Analysis(
     ['app\\main.py'],
-    pathex=['.\\.venv\\Lib\\site-packages\\'],
+    pathex=[],
     binaries=[],
     datas=[('assets', 'assets'), ('.\\.venv\\Lib\\site-packages\\ahk\\', 'ahk')],
     hiddenimports=[],
