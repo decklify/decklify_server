@@ -1,6 +1,6 @@
 [project]
 name = "Decklify-server"
-version = "0.1.0"
+version = "0.1.1"
 description = "Server for the Decklify client"
 readme = "README.md"
 requires-python = ">=3.13"
