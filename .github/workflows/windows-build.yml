@@ -50,7 +50,7 @@ jobs:
       # 7. Build installer
       - name: Build Installer
         run: |
-          "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
 
       # 8. Upload artifact (always useful)
       - name: Upload artifact
