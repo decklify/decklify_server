@@ -2,7 +2,7 @@ import json
 from ahk import AHK
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
-from utils import resource_path
+from paths import PATHS
 
 from registry import reg
 
@@ -10,9 +10,9 @@ from registry import reg
 app = FastAPI()
 ahk = AHK(version="v2")
 
-app.mount("/assets", StaticFiles(directory=resource_path("assets")), name="assets")
+app.mount("/assets", StaticFiles(directory=PATHS["tile_icons"]), name="assets")
 
-CONFIG_PATH = resource_path("data", "layout", "config.json")
+CONFIG_PATH = PATHS["config"] / "config.json"
 
 
 @app.get("/layout")
@@ -34,7 +34,7 @@ def macro(macro_name: str):
         raise HTTPException(status_code=404, detail=f"Unknown macro '{macro_name}'.")
 
     try:
-        ahk.run_script(script.read_text(), blocking=False)
+        ahk.run_script(str(script), blocking=False)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Macro '{macro_name}' failed: {e}")
