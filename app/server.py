@@ -10,7 +10,7 @@ from registry import reg
 app = FastAPI()
 ahk = AHK(version="v2")
 
-app.mount("/assets", StaticFiles(directory=PATHS["tile_icons"]), name="assets")
+app.mount("/assets/icons", StaticFiles(directory=PATHS["tile_icons"]), name="assets")
 
 CONFIG_PATH = PATHS["config"] / "config.json"
 
