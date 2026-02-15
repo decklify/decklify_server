@@ -1,8 +1,8 @@
 import pystray
 from pystray import MenuItem as item
 from PIL import Image
-from utils import resource_path
 
+from paths import get_exe_path
 from registry import reg
 
 
@@ -11,24 +11,19 @@ def on_reload(icon, item):
     reg.reload()
 
 
-def on_show_logs(icon, item):
-    print("[Tray] Logs are in the console window")
-
-
 def on_exit(icon, item):
     print("[Tray] Exiting...")
     icon.stop()
 
 
 def run_tray():
-    image = Image.open(resource_path("resources", "icon", "icon.png"))
+    image = Image.open(get_exe_path() / "assets" / "icon.png")
 
     menu = pystray.Menu(
         item("Reload scripts", on_reload),
-        item("Show logs", on_show_logs),
         item("Exit", on_exit),
     )
 
-    icon = pystray.Icon("MacroServer", image, "Macro Server", menu)
+    icon = pystray.Icon("Decklify", image, "Decklify server", menu)
 
     icon.run()
