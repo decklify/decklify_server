@@ -5,6 +5,7 @@ The server for the Decklify client written in Python.
 ## Built With
 
 * [Python](https://www.python.org/) - The language
+* [uv](https://docs.astral.sh/uv/) - The package manager
 * [FastAPI](https://fastapi.tiangolo.com/) - The webserver
 * [pystray](https://github.com/moses-palmer/pystray) - The tray
 * [ahk](https://github.com/spyoungtech/ahk) - The Auto Hot Key Python wrapper
