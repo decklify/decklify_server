@@ -5,7 +5,7 @@ a = Analysis(
     ['app\\main.py'],
     pathex=[],
     binaries=[],
-    datas=[('assets', 'assets'), ('.\\.venv\\Lib\\site-packages\\ahk\\', 'ahk')],
+    datas=[('assets', 'assets'), ('.\\.venv\\Lib\\site-packages\\ahk\\', 'ahk'), ('app/static', 'static')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
