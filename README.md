@@ -56,6 +56,7 @@ Decklify/
 - [ ] Add CONTRIBUTING.md
 - [ ] Document code
 - [ ] Add an editor in the browser to customize the deck (instead of going into the files)
+- [ ] Optional: use https between client and server
 - [ ] Change the app icon (or not :))
 - [ ] Think of more things to do
 
