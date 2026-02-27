@@ -1,0 +1,222 @@
+:root{
+  --deck-width: 1024px;
+  --deck-height: 550px;
+}
+
+/* center the whole editor vertically & horizontally */
+html, body { height: 100%; margin: 0; }
+body {
+  font-family: system-ui, sans-serif;
+  background: #121212;
+  color: #fff;
+  display: flex;
+  align-items: center;       /* vertical center */
+  justify-content: center;   /* horizontal center */
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* main container holds title+UI */
+.container {
+  width: calc(var(--deck-width) + 40px);
+}
+
+/* title */
+.header { text-align: center; margin-bottom: 50px; }
+.header h1 { margin: 0; font-size: 20px; font-weight: 700; }
+
+/* top controls bar */
+.topbar {
+  width: calc(var(--deck-width));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.page-controls, .global-controls { display: flex; align-items: center; }
+.page-controls label { margin-right: 8px; }
+.page-controls select { margin-right: 8px; padding: 6px; min-width: 140px; }
+
+button {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.03);
+  color: #fff;
+  cursor: pointer;
+}
+button:hover { background: rgba(255,255,255,0.06); }
+
+/* Page overview thumbnails */
+.page-overview {
+  width: calc(var(--deck-width));
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+/* thumbnail card */
+.page-thumb {
+  width: 120px;
+  height: 80px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  padding: 6px;              /* keep some padding for title and mini-grid */
+  box-sizing: border-box;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-thumb.selected {
+  outline: 3px solid rgba(0,150,255,0.92);
+}
+
+/* dragging state */
+.page-thumb.dragging { opacity: 0.5; transform: scale(0.98); }
+
+/* place background on the inner stretch area so image fills thumbnail fully */
+.page-thumb .thumb-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;         /* ensure image fills entire thumbnail */
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 1;
+}
+
+/* dimmer overlay so tiles remain legible over busy images */
+.page-thumb .thumb-dim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* thumbnail header/title and grid sit above the bg/dim */
+.page-thumb .thumb-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* thumbnail header/title */
+.page-thumb .thumb-title { font-size: 12px; text-align: center; color: rgba(255,255,255,0.95); }
+
+/* tiny grid inside thumbnail */
+.thumb-grid {
+  display: grid;
+  gap: 3px;
+  margin-top: 4px;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+/* make thumbnail tiles visually stronger so they contrast with background */
+.thumb-tile {
+  background: rgba(0,0,0,0.60);      /* dark, high contrast */
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: inset 0 -1px 2px rgba(0,0,0,0.6);
+}
+.thumb-empty {
+  background: rgba(255,255,255,0.03); /* subtle placeholder */
+  border-radius: 3px;
+}
+
+/* Deck container */
+#deck {
+  display: grid;
+  gap: 10px;
+  width: var(--deck-width);
+  height: var(--deck-height);
+  background-size: cover;
+  background-position: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Occupied tile */
+.tile {
+  background: rgba(50, 50, 50, 0.5);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: grab;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 120ms;
+}
+.tile:active { cursor: grabbing; }
+.tile:hover { transform: translateY(-4px); box-shadow: 0 6px 14px rgba(0,0,0,0.45); outline: 3px solid rgba(0,150,255,0.92); }
+
+.tile.dragging { opacity: 0.5; transform: scale(0.98); box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+
+/* Drop target highlight */
+.cell-drop-target { outline: 3px dashed rgba(255,255,255,0.18); outline-offset: -6px; border-radius: 10px; }
+
+/* Icon */
+.tile img.icon { max-width: 40%; max-height: 40%; display: block; }
+
+/* Label centered under icon */
+.tile .label {
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0px 1px 4px rgba(0,0,0,0.6);
+  margin-top: 6px;
+  pointer-events: none;
+}
+
+/* Empty cell: transparent and non-interactive */
+.empty { background: transparent; width: 100%; height: 100%; pointer-events: none; }
+
+/* Tile editor popup & page settings */
+#tileEditor, #pageSettings {
+  position: absolute;
+  background: #232323;
+  border: 1px solid #555;
+  padding: 10px;
+  border-radius: 8px;
+  color: #fff;
+  z-index: 1000;
+  width: 260px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+#tileEditor label, #pageSettings label { display:block; margin-top:6px; font-size:13px; }
+#tileEditor input, #pageSettings input {
+  width:100%; margin-top:4px; padding:6px; box-sizing:border-box;
+  border-radius:4px; border:1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02); color:#fff;
+}
+
+.hidden { display: none; }

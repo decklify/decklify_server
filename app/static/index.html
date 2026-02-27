@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decklify Editor</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header class="header">
+      <h1>Decklify Editor</h1>
+    </header>
+
+    <div class="topbar">
+      <div class="page-controls">
+        <label for="pageSelect">Select Page:</label>
+        <select id="pageSelect"></select>
+
+        <button id="pageSettingsBtn" title="Edit page settings">Page Settings</button>
+        <button id="addPageBtn" title="Add page">+ Page</button>
+        <button id="deletePageBtn" title="Delete page">Delete Page</button>
+      </div>
+
+      <div class="global-controls">
+        <button id="addTileBtn">Add Tile</button>
+        <button id="deleteTileBtn">Delete Selected Tile</button>
+        <button id="saveBtn">Save to Server</button>
+        <button id="downloadBtn">Download Layout</button>
+      </div>
+    </div>
+
+    <!-- Page overview (thumbnails, draggable to reorder) -->
+    <div id="pageOverview" class="page-overview" aria-label="Pages overview"></div>
+
+    <div id="deck" role="grid" aria-label="Deck grid"></div>
+
+    <!-- Tile editor popup -->
+    <div id="tileEditor" class="hidden" role="dialog" aria-modal="true">
+      <h3>Edit Tile</h3>
+      <label>
+        Label:
+        <input type="text" id="tileLabel">
+      </label>
+      <label>
+        Icon Name:
+        <input type="text" id="tileIcon">
+      </label>
+      <label>
+        Macro Name:
+        <input type="text" id="tileMacro">
+      </label>
+      <div style="margin-top: 10px;">
+        <button id="saveTile">Save</button>
+        <button id="cancelTile">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Page settings modal -->
+    <div id="pageSettings" class="hidden" role="dialog" aria-modal="true">
+      <h3>Page Settings</h3>
+      <label>
+        Width (columns):
+        <input type="number" id="pageWidth" min="1" max="10">
+      </label>
+      <label>
+        Height (rows):
+        <input type="number" id="pageHeight" min="1" max="10">
+      </label>
+      <label>
+        Background URL:
+        <input type="text" id="pageBackground">
+      </label>
+      <div style="margin-top:10px;">
+        <button id="savePageSettings">Save</button>
+        <button id="cancelPageSettings">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
