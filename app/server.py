@@ -1,3 +1,4 @@
+import html
 import json
 from pathlib import Path
 from ahk import AHK
@@ -12,12 +13,8 @@ from registry import reg
 app = FastAPI()
 ahk = AHK(version="v2")
 
-STATIC_PATH = Path(__file__).parent / "static"
 
-app.mount("/assets/icons", StaticFiles(directory=PATHS["tile_icons"]), name="assets")
-app.mount("/static", StaticFiles(directory=STATIC_PATH), name="static")
-
-CONFIG_PATH = PATHS["config"] / "config.json"
+STATIC_PATH = Path(__file__).parent.parent / "decklify-ui/dist"
 
 
 @app.get("/")
@@ -27,6 +24,8 @@ def root():
 
 @app.get("/layout")
 async def get_layout():
+    CONFIG_PATH = PATHS["config"] / "config.json"
+
     if not CONFIG_PATH.exists():
         raise HTTPException(status_code=404, detail="Config file not found")
 
@@ -79,3 +78,7 @@ def macro(macro_name: str):
         raise HTTPException(status_code=500, detail=f"Macro '{macro_name}' failed: {e}")
 
     return {"status": "ok", "macro": macro_name}
+
+
+app.mount("/assets/icons", StaticFiles(directory=PATHS["tile_icons"]), name="assets")
+app.mount("/", StaticFiles(directory=STATIC_PATH, html=True), name="static")

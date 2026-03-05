@@ -20,7 +20,7 @@ def open_config(icon, item):
 
 
 def open_editor(icon, item):
-    webbrowser.open("http://localhost:8000")
+    webbrowser.open("http://localhost:8000/index.html")
 
 
 def on_exit(icon, item):
