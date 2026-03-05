@@ -20,7 +20,23 @@ Download the installer from the releases and install the server.
 
 ### Configuration
 
-To configure the server and macros, press `Win + r` and go to `%localappdata%/Decklify/Decklify`. To get started take a look at [the example configuration](https://github.com/decklify/decklify_server/tree/master/examples).
+#### Web browser editor
+
+To edit the deck configuration
+
+- right click on the tray app
+- click `open editor`
+
+This will open the editor in your browser, in case it didn't work you can go to [http://localhost:8000](http://localhost:8000).
+
+In there you'll be able to drag the tiles and pages around and configure them. Once done click the `Save to Server` button and restart the client to load in the new config.
+
+To add macros and icons
+
+- right click on the tray app
+- click `open config folder`
+
+To get started take a look at [the example configuration](https://github.com/decklify/decklify_server/tree/master/examples).
 
 #### Folder structure
 
@@ -51,14 +67,15 @@ Decklify/
 * [PyInstaller](https://pyinstaller.org/en/stable/) - The bundler
 * [Inno Setup](https://jrsoftware.org/isinfo.php) - The installation builder for Windows
 
-## Roadmap
+## Roadmap (not in order)
 
+- [x] Add an editor in the browser to customize the deck (instead of going into the files)
 - [ ] Add CONTRIBUTING.md
 - [ ] Document code
-- [x] Add an editor in the browser to customize the deck (instead of going into the files)
 - [ ] Optional: use https between client and server
 - [ ] Change the app icon (or not :))
-- [ ] Think of more things to do
+- [ ] Add a way to easily change the client's ip address in the editor
+- [ ] Migrate editor from plain html, js and css to svelte
 
 ## License
 
