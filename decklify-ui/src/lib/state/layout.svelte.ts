@@ -1,8 +1,8 @@
 import { number } from "zod";
-import type { Layout, Page } from "../../types";
+import type { Layout, Page, Tile } from "../../types";
 import { fetchLayout } from "../api";
 
-const state = $state({
+const _state = $state({
   layout: { pages: [] } as Layout,
   currentPageIndex: 0,
   selectedTileIndex: null as null | number,
@@ -17,26 +17,26 @@ const state = $state({
 });
 
 export function addPage() {
-  state.layout.pages.push({
+  _state.layout.pages.push({
     width: 3,
     height: 2,
     tiles: [],
     backgroundUrl: "",
   });
 
-  state.currentPageIndex = state.layout.pages.length - 1;
+  _state.currentPageIndex = _state.layout.pages.length - 1;
 }
 
 export function deletePage() {
-  state.layout.pages.pop();
+  _state.layout.pages.pop();
 
-  state.currentPageIndex = state.currentPageIndex = 0
+  _state.currentPageIndex = _state.currentPageIndex = 0
     ? 0
-    : state.layout.pages.length - 1;
+    : _state.layout.pages.length - 1;
 }
 
 export function addTile() {
-  const page = state.layout.pages[state.currentPageIndex];
+  const page = _state.layout.pages[_state.currentPageIndex];
   const capacity = page.width * page.height;
 
   if (page.tiles.length >= capacity) alert("Page is full.");
@@ -49,33 +49,33 @@ export function addTile() {
 }
 
 export function deleteTile() {
-  state.layout.pages[state.currentPageIndex].tiles.pop();
+  _state.layout.pages[_state.currentPageIndex].tiles.pop();
 }
 
 export function openTileEditor(index: number) {
-  state.selectedTileIndex = index;
-  state.showTileEditor = true;
+  _state.selectedTileIndex = index;
+  _state.showTileEditor = true;
 }
 
 export function openPageSettings() {
-  state.showPageSettings = true;
+  _state.showPageSettings = true;
 }
 
 export function onTileDragStart(ev: DragEvent, index: number) {
-  state.dragSourceIndex = index;
+  _state.dragSourceIndex = index;
   ev.dataTransfer!.effectAllowed = "move";
 }
 
 export function onTileDragEnd() {
-  state.dragSourceIndex = null;
+  _state.dragSourceIndex = null;
 }
 
 export function onTileDrop(ev: DragEvent, targetIndex: number) {
   ev.preventDefault();
-  if (state.dragSourceIndex == null) return;
+  if (_state.dragSourceIndex == null) return;
 
-  const tiles = state.layout.pages[state.currentPageIndex].tiles;
-  const src = state.dragSourceIndex;
+  const tiles = _state.layout.pages[_state.currentPageIndex].tiles;
+  const src = _state.dragSourceIndex;
 
   if (targetIndex < tiles.length) {
     [tiles[src], tiles[targetIndex]] = [tiles[targetIndex], tiles[src]];
@@ -85,30 +85,41 @@ export function onTileDrop(ev: DragEvent, targetIndex: number) {
     tiles.splice(dest, 0, tile);
   }
 
-  state.dragSourceIndex = null;
-  state.selectedTileIndex = null;
-  state.dragOverIndex = null;
+  _state.dragSourceIndex = null;
+  _state.selectedTileIndex = null;
+  _state.dragOverIndex = null;
 }
 
 export function onTileDragOver(ev: DragEvent, index: number) {
   ev.preventDefault();
-  state.dragOverIndex = index;
+  _state.dragOverIndex = index;
 }
 
 export function onTileDragLeave() {
-  state.dragOverIndex = null;
+  _state.dragOverIndex = null;
+}
+
+export function saveTile(newTile: Tile): void {
+  if (_state.selectedTileIndex === null) return;
+  const tile =
+    _state.layout.pages[_state.currentPageIndex].tiles[
+      _state.selectedTileIndex
+    ];
+  tile.label = newTile.label;
+  tile.iconName = newTile.iconName;
+  tile.action = newTile.action;
 }
 
 export async function loadLayout() {
   try {
-    state.loading = true;
-    state.error = null;
-    state.layout = await fetchLayout();
+    _state.loading = true;
+    _state.error = null;
+    _state.layout = await fetchLayout();
   } catch (e) {
-    state.error = String(e);
+    _state.error = String(e);
   } finally {
-    state.loading = false;
+    _state.loading = false;
   }
 }
 
-export { state };
+export { _state };

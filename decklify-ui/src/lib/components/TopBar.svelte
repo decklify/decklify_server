@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { state } from "../state/layout.svelte";
+  import { _state } from "../state/layout.svelte";
 
   interface Props {
     addPage: () => void;
@@ -19,14 +19,14 @@
   <!-- Left: page controls -->
   <div class="flex items-center gap-2">
     <select
-      value={state.currentPageIndex}
+      value={_state.currentPageIndex}
       onchange={(e) =>
-        (state.currentPageIndex = Number(
+        (_state.currentPageIndex = Number(
           (e.target as HTMLSelectElement).value,
         ))}
-      class="px-2 py-1.5 rounded bg-white/5 border border-white/10 text-white text-sm min-w-[140px]"
+      class="px-2 py-1.5 rounded bg-white/5 border border-white/10 text-white text-sm min-w-35"
     >
-      {#each state.layout.pages as page, i}
+      {#each _state.layout.pages as page, i}
         <option class="text-black" value={i}
           >Page {i + 1} ({page.width}x{page.height})</option
         >
@@ -52,6 +52,11 @@
       - Page
     </button>
   </div>
+
+  <!-- Center: Title
+  <header>
+    <h1 class="text-xl font-bold">Decklify Editor</h1>
+  </header> -->
 
   <!-- Right: tile + save controls -->
   <div class="flex items-center gap-2">

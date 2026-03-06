@@ -7,7 +7,7 @@
     onTileDragStart,
     onTileDrop,
     openTileEditor,
-    state,
+    _state,
   } from "../state/layout.svelte";
 
   interface Props {
@@ -32,11 +32,11 @@
       w-full h-full border-2 border-white/10 cursor-grab active:cursor-grabbing
       hover:bg-white/10 hover:-translate-y-1 transition-all duration-150
       backdrop-blur-sm hover:border-blue-500
-      {state.selectedTileIndex === index
+      {_state.selectedTileIndex === index
       ? 'border-blue-400'
       : 'border-white/10'}
-      {state.dragSourceIndex === index ? 'opacity-40 scale-95' : ''}
-      {state.dragOverIndex === index && state.dragSourceIndex !== index
+      {_state.dragSourceIndex === index ? 'opacity-40 scale-95' : ''}
+      {_state.dragOverIndex === index && _state.dragSourceIndex !== index
       ? 'border-dashed border-white/60 bg-white/10'
       : 'border-solid'}
     "
@@ -63,7 +63,7 @@
     ondrop={(ev) => onTileDrop(ev, index)}
     class="
       w-full h-full rounded-xl border transition-all duration-150
-      {state.dragOverIndex === index
+      {_state.dragOverIndex === index
       ? 'border-dashed border-white/60 bg-white/10'
       : 'border-dashed border-white/10'}
     "

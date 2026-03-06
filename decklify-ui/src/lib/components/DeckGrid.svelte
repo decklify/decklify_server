@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { state } from "../state/layout.svelte";
+  import { _state } from "../state/layout.svelte";
   import TileCell from "./TileCell.svelte";
 
-  const currentPage = $derived(state.layout.pages[state.currentPageIndex]);
+  const currentPage = $derived(_state.layout.pages[_state.currentPageIndex]);
   const cells = $derived(
     Array.from({ length: currentPage.width * currentPage.height }, (_, i) => i),
   );
 </script>
 
-<div class="w-full max-w-5xl">
+<div class="w-4/5">
   <div
-    class="grid gap-2 p-2 rounded-xl bg-cover bg-center w-full"
+    class="grid gap-5 p-5 rounded-xl bg-cover bg-center w-full"
     style="
       aspect-ratio: 1024 / 550;
       grid-template-columns: repeat({currentPage.width}, 1fr);
