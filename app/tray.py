@@ -4,13 +4,15 @@ import pystray
 from pystray import MenuItem as item
 from PIL import Image
 import webbrowser
-
 from paths import get_exe_path
 from registry import reg
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def on_reload(icon, item):
-    print("[Tray] Reloading scripts...")
+    logger.info("Reloading scripts...")
     reg.reload()
 
 
@@ -24,7 +26,7 @@ def open_editor(icon, item):
 
 
 def on_exit(icon, item):
-    print("[Tray] Exiting...")
+    logger.info("Exiting...")
     icon.stop()
 
 

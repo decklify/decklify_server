@@ -1,4 +1,3 @@
-import html
 import json
 from pathlib import Path
 from ahk import AHK
