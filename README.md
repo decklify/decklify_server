@@ -70,11 +70,11 @@ Decklify/
 ## Roadmap (not in order)
 
 - [x] Add an editor in the browser to customize the deck (instead of going into the files)
+- [x] ~~Add a way to easily change the client's ip address in the editor~~  Add mDNS for automatic pairing
 - [ ] Add CONTRIBUTING.md
 - [ ] Document code
 - [ ] Optional: use https between client and server
 - [ ] Change the app icon (or not :))
-- [ ] Add a way to easily change the client's ip address in the editor
 - [ ] Migrate editor from plain html, js and css to svelte
 
 ## License
