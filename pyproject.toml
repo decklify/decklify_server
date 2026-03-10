@@ -11,4 +11,5 @@ dependencies = [
     "platformdirs>=4.9.0",
     "pyinstaller>=6.18.0",
     "pystray>=0.19.5",
+    "zeroconf>=0.148.0",
 ]
