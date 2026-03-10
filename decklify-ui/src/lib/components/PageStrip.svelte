@@ -94,7 +94,7 @@
 
   <button
     onclick={addPage}
-    class="shrink-0 w-10 rounded-lg border border-dashed border-white/20
+    class="shrink-0 w-32 rounded-lg border border-dashed border-white/20
            bg-transparent text-white/30 hover:text-white/60 hover:border-white/40
            transition-colors text-xl flex items-center justify-center"
     style="aspect-ratio: 1024 / 550;"
