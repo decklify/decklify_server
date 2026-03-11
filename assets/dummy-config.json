@@ -1,0 +1,65 @@
+{
+    "pages": [
+        {
+            "width": 3,
+            "height": 2,
+            "tiles": [
+                {
+                    "label": "Hey!",
+                    "iconName": "",
+                    "action": {
+                        "Macro": {
+                            "name": ""
+                        }
+                    }
+                },
+                {
+                    "label": "Thank",
+                    "iconName": "",
+                    "action": {
+                        "Macro": {
+                            "name": ""
+                        }
+                    }
+                },
+                {
+                    "label": "you",
+                    "iconName": "",
+                    "action": {
+                        "Macro": {
+                            "name": ""
+                        }
+                    }
+                },
+                {
+                    "label": "for",
+                    "iconName": "",
+                    "action": {
+                        "Macro": {
+                            "name": ""
+                        }
+                    }
+                },
+                {
+                    "label": "using",
+                    "iconName": "",
+                    "action": {
+                        "Macro": {
+                            "name": ""
+                        }
+                    }
+                },
+                {
+                    "label": "Decklify!",
+                    "iconName": "",
+                    "action": {
+                        "Macro": {
+                            "name": ""
+                        }
+                    }
+                }
+            ],
+            "backgroundUrl": "https://w.wallhaven.cc/full/j3/wallhaven-j3l2xp.jpg"
+        }
+    ]
+}
