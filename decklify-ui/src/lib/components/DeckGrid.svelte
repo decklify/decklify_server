@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _state } from "../state/layout.svelte";
+  import { _state, addTile } from "../state/layout.svelte";
   import TileCell from "./TileCell.svelte";
 
   const currentPage = $derived(_state.layout.pages[_state.currentPageIndex]);
@@ -19,7 +19,19 @@
     "
   >
     {#each cells as i}
-      <TileCell index={i} tile={currentPage.tiles[i]} />
+      {#if i < currentPage.tiles.length}
+        <TileCell index={i} tile={currentPage.tiles[i]} />
+      {:else if i === currentPage.tiles.length && i < currentPage.width * currentPage.height}
+        <button
+          onclick={addTile}
+          class="w-full h-full rounded-xl border-2 border-dashed border-white/20
+             text-white/30 hover:text-white/60 hover:border-white/40
+             transition-colors text-3xl flex items-center justify-center"
+          >+</button
+        >
+      {:else}
+        <TileCell index={i} />
+      {/if}
     {/each}
   </div>
 </div>

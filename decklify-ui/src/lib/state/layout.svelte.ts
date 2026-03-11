@@ -1,4 +1,3 @@
-import { number } from "zod";
 import type { Layout, Page, Tile } from "../../types";
 import { fetchLayout } from "../api";
 
@@ -48,8 +47,8 @@ export function addTile() {
   });
 }
 
-export function deleteTile() {
-  _state.layout.pages[_state.currentPageIndex].tiles.pop();
+export function deleteTile(index: number) {
+  _state.layout.pages[_state.currentPageIndex].tiles.splice(index, 1);
 }
 
 export function openTileEditor(index: number) {

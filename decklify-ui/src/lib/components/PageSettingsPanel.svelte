@@ -40,7 +40,10 @@
   <div
     role="presentation"
     class="fixed inset-0 z-40"
-    onclick={handleClose}
+    onclick={() => {
+      handleSave();
+      handleClose();
+    }}
   ></div>
 {/if}
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _state, saveTile } from "../state/layout.svelte";
+  import { _state, deleteTile, saveTile } from "../state/layout.svelte";
 
   // local form state
   let label = $state("");
@@ -36,7 +36,10 @@
   <div
     role="presentation"
     class="fixed inset-0 z-40"
-    onclick={handleClose}
+    onclick={() => {
+      handleSave();
+      handleClose();
+    }}
   ></div>
 {/if}
 
@@ -120,6 +123,18 @@
                placeholder:text-white/20 focus:outline-none focus:border-blue-500/50 transition-colors"
       />
     </div>
+
+    <button
+      onclick={() => {
+        if (_state.selectedTileIndex !== null) {
+          deleteTile(_state.selectedTileIndex);
+          handleClose();
+        }
+      }}
+      class="mt-auto px-2.5 py-1.5 rounded-lg border border-red-500/30 bg-red-500/10 text-red-400 text-sm hover:bg-red-500/20 transition-colors"
+    >
+      Delete tile
+    </button>
   </div>
 
   <!-- footer -->
