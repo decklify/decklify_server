@@ -1,10 +1,11 @@
 import json
 from pathlib import Path
+import shutil
 from ahk import AHK
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from paths import PATHS
+from paths import PATHS, get_exe_path
 
 from registry import reg
 
@@ -23,12 +24,17 @@ def root():
 
 @app.get("/layout")
 async def get_layout():
-    CONFIG_PATH = PATHS["config"] / "config.json"
+    CONFIG_FILE = PATHS["config"] / "config.json"
 
-    if not CONFIG_PATH.exists():
-        raise HTTPException(status_code=404, detail="Config file not found")
+    if not CONFIG_FILE.exists():
+        DUMMY_FILE = get_exe_path() / "assets" / "dummy-config.json"
+        if not DUMMY_FILE.exists():
+            raise HTTPException(status_code=404, detail="dummy-config.json not found")
 
-    with CONFIG_PATH.open("r", encoding="utf-8") as f:
+        CONFIG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(DUMMY_FILE, CONFIG_FILE)
+
+    with CONFIG_FILE.open("r", encoding="utf-8") as f:
         data = json.load(f)
 
     return data
