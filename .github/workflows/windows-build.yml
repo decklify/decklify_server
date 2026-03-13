@@ -19,36 +19,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      # 2. Install uv
+      # 2. Setup Bun
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      # 3. Build Svelte UI
+      - name: Build Svelte UI
+        working-directory: ./decklify-ui
+        run: |
+          bun install
+          bun run build
+
+      # 4. Install uv
       - name: Install uv
         uses: astral-sh/setup-uv@v7
 
-      # 3. Install dependencies
+      # 5. Install dependencies
       - name: Install dependencies
         run: uv sync
 
-      # 4. Install Inno Setup
+      # 6. Install Inno Setup
       - name: Install Inno Setup
         run: choco install innosetup --no-progress
 
-      # 5. Build with PyInstaller
+      # 7. Build with PyInstaller
       - name: Build EXE
         run: |
           .venv\Scripts\python -m PyInstaller decklify.spec
 
-      # 6. Build installer
+      # 8. Build installer
       - name: Build Installer
         run: |
           & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" installer.iss
 
-      # 7. Upload artifact (always useful)
+      # 9. Upload artifact (always useful)
       - name: Upload artifact
         uses: actions/upload-artifact@v6
         with:
           name: decklify-installer
           path: Output/*.exe
 
-      # 8. Attach to GitHub Release
+      # 10. Attach to GitHub Release
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
