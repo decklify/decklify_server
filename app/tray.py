@@ -8,6 +8,7 @@ from paths import get_exe_path
 from registry import reg
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -26,7 +27,7 @@ def open_config(icon, item):
 
 def open_editor(icon, item):
     logger.info("Opening editor in browser...")
-    webbrowser.open("http://localhost:8000/index.html")
+    webbrowser.open("http://localhost:8000/ui/index.html")
     logger.info("Done opening editor in browser!")
 
 

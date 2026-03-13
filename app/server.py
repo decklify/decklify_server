@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 import shutil
 from ahk import AHK
 from fastapi import FastAPI, HTTPException, Request
@@ -14,7 +13,7 @@ app = FastAPI()
 ahk = AHK(version="v2")
 
 
-STATIC_PATH = Path(__file__).parent.parent / "decklify-ui/dist"
+STATIC_PATH = get_exe_path() / "decklify-ui/dist"
 
 
 @app.get("/")
@@ -86,4 +85,4 @@ def macro(macro_name: str):
 
 
 app.mount("/assets/icons", StaticFiles(directory=PATHS["tile_icons"]), name="assets")
-app.mount("/", StaticFiles(directory=STATIC_PATH, html=True), name="static")
+app.mount("/ui", StaticFiles(directory=STATIC_PATH, html=True), name="static")

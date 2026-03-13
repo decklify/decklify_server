@@ -2,6 +2,7 @@ import socket
 from zeroconf import Zeroconf, ServiceInfo
 import logging
 
+
 logger = logging.getLogger(__name__)
 zc: Zeroconf | None = None
 mdns_info: ServiceInfo | None = None
