@@ -1,6 +1,8 @@
 import sys
 import threading
 import uvicorn
+import win32con
+import win32gui
 from mdns import start_mdns, stop_mdns
 from paths import PATHS
 from server import app
@@ -24,11 +26,22 @@ if sys.stdout is not None:
     stream_handler.setFormatter(formatter)
     root_logger.addHandler(stream_handler)
 
+logger = logging.getLogger(__name__)
 
 server: uvicorn.Server | None = None
-
+server_thread: threading.Thread | None = None
 
 PORT = 8000
+
+
+def cleanup():
+    logger.info("Shutting down...")
+    stop_mdns()
+    if server:
+        server.should_exit = True
+    if server_thread:
+        server_thread.join(timeout=5)
+        logger.info("Server thread joined")
 
 
 def start_server():
@@ -41,8 +54,29 @@ def start_server():
     server.run()
 
 
+def create_shutdown_listener():
+    def wnd_proc(hwnd, msg, wparam, lparam):
+        if msg == win32con.WM_ENDSESSION:
+            cleanup()
+        return win32gui.DefWindowProc(hwnd, msg, wparam, lparam)
+
+    def message_loop():
+        wc = win32gui.WNDCLASS()
+        wc.lpfnWndProc = wnd_proc  # type: ignore
+        wc.lpszClassName = "DecklifyShutdownListener"  # type: ignore
+        win32gui.RegisterClass(wc)
+        win32gui.CreateWindow(wc.lpszClassName, "", 0, 0, 0, 0, 0, 0, 0, None, None)  # type: ignore
+
+        win32gui.PumpMessages()
+
+    thread = threading.Thread(target=message_loop, daemon=True)
+    thread.start()
+
+
 if __name__ == "__main__":
     multiprocessing.freeze_support()
+
+    create_shutdown_listener()
 
     server_thread = threading.Thread(target=start_server)
     server_thread.start()
@@ -51,9 +85,4 @@ if __name__ == "__main__":
 
     run_tray()
 
-    if server:
-        server.should_exit = True
-
-        server_thread.join()
-
-    stop_mdns()
+    cleanup()
