@@ -3,7 +3,7 @@
 ; Non-commercial use only
 
 #define MyAppName "Decklify"
-#define MyAppVersion "0.4.1"
+#define MyAppVersion "0.4.2"
 #define MyAppURL "https://github.com/decklify/decklify_server"
 #define MyAppExeName "Decklify.exe"
 
